@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/fourOperationsFragment">
+
+    <fragment
+        android:id="@+id/fourOperationsFragment"
+        android:name="com.ardakazanci.mvvm_simple_calculator.main.FourOperationsFragment"
+        android:label="fragment_four_operations"
+        tools:layout="@layout/fragment_four_operations" >
+        <action
+            android:id="@+id/action_fourOperationsFragment_to_calculateResultFragment"
+            app:destination="@id/calculateResultFragment"
+            app:popUpTo="@+id/fourOperationsFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/calculateResultFragment"
+        android:name="com.ardakazanci.mvvm_simple_calculator.result.CalculateResultFragment"
+        android:label="fragment_calculate_result"
+        tools:layout="@layout/fragment_calculate_result" >
+        <argument
+            android:name="numberOne"
+            app:argType="integer" />
+        <argument
+            android:name="numberSecond"
+            app:argType="integer" />
+        <argument
+            android:name="operationSymbol"
+            app:argType="string" />
+    </fragment>
+</navigation>
