@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -13,6 +14,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.ardakazanci.mvvm_simple_calculator.R
 import com.ardakazanci.mvvm_simple_calculator.databinding.FragmentFourOperationsBinding
+import com.ardakazanci.mvvm_simple_calculator.utils.Symbol
+import kotlinx.android.synthetic.main.fragment_four_operations.*
 
 /**
  * Four Operations Mathematical
@@ -43,18 +46,32 @@ class FourOperationsFragment : Fragment() {
 
 
         viewModel.additionClicked.observe(this, Observer {
-            if (it) {
-                view?.findNavController()
-                    ?.navigate(R.id.action_fourOperationsFragment_to_calculateResultFragment)
-                if(binding.edtNumberOne.text.isNotEmpty()){
-                    // İlgili değerler alınıp gönderilecek
-                    // Burada kaldık.
+
+            if (it) { // Button Clicked ?
+                if (edtNumberOne.text.isNotEmpty() && edtNumberSecond.text.isNotEmpty()) { // edittext empty control
+
+                    // All operations in ViewModel
+                    viewModel.onCalculateToResult(
+                        binding.edtNumberOne.text.toString().toInt(),
+                        binding.edtNumberSecond.text.toString().toInt(),
+                        Symbol.PLUS
+                    )
+
+                    Toast.makeText(this.context, "" + viewModel.result.value, Toast.LENGTH_LONG)
+                        .show()
+                } else {
+                    Toast.makeText(this.context, "Empty", Toast.LENGTH_LONG).show()
                 }
-                val action = FourOperationsFragmentDirections.actionFourOperationsFragmentToCalculateResultFragment(viewModel.numberOne.value!!,viewModel.numberSecond.value!!,viewModel.operationSymbol.value!!)
-                NavHostFragment.findNavController(this).navigate(action)
+
 
             }
+
         })
+
+
+
+
+
 
 
 

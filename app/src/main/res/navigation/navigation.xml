@@ -22,13 +22,7 @@
         android:label="fragment_calculate_result"
         tools:layout="@layout/fragment_calculate_result" >
         <argument
-            android:name="numberOne"
+            android:name="result"
             app:argType="integer" />
-        <argument
-            android:name="numberSecond"
-            app:argType="integer" />
-        <argument
-            android:name="operationSymbol"
-            app:argType="string" />
     </fragment>
 </navigation>

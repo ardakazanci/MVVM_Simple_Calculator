@@ -4,20 +4,24 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ardakazanci.mvvm_simple_calculator.utils.Symbol
 
 class FourOperationsViewModel : ViewModel() {
+
+    private val _result = MutableLiveData<Int>()
+    val result: LiveData<Int>
+        get() = _result
+
 
     private val _numberOne = MutableLiveData<Int>()
     val numberOne: LiveData<Int>
         get() = _numberOne
 
+
     private val _numberSecond = MutableLiveData<Int>()
     val numberSecond: LiveData<Int>
         get() = _numberSecond
 
-    private val _operationSymbol = MutableLiveData<String>()
-    val operationSymbol: LiveData<String>
-        get() = _operationSymbol
 
 
     // OperationsButtonClicked
@@ -39,6 +43,7 @@ class FourOperationsViewModel : ViewModel() {
 
 
     init {
+
         _additionClicked.value = false
         _substractionClicked.value = false
         _multiplicationClicked.value = false
@@ -56,22 +61,34 @@ class FourOperationsViewModel : ViewModel() {
 
     fun onAdditionClicked() {
         _additionClicked.value = true
-        _operationSymbol.value = "+"
     }
 
     fun onSubstractionClicked() {
         _substractionClicked.value = true
-        _operationSymbol.value = "-"
     }
 
     fun onMultiplicationClicked() {
         _multiplicationClicked.value = true
-        _operationSymbol.value = "*"
     }
 
     fun onDivisionClicked() {
         _divisionClicked.value = true
-        _operationSymbol.value = "/"
+    }
+
+
+    fun onCalculateToResult(numberOne: Int, numberSecond: Int, symbol: Symbol) {
+
+
+        if (symbol == Symbol.PLUS) {
+            _result.value = numberOne + numberSecond
+        } else if (symbol == Symbol.MINUS) {
+            _result.value = numberOne - numberSecond
+        } else if (symbol == Symbol.MULTIPLY) {
+            _result.value = numberOne * numberSecond
+        } else if (symbol == Symbol.DIVIDED) {
+            _result.value = numberOne / numberSecond
+        }
+
     }
 
 }
