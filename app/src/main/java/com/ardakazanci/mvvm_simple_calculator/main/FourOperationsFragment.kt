@@ -2,6 +2,7 @@ package com.ardakazanci.mvvm_simple_calculator.main
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -57,8 +58,19 @@ class FourOperationsFragment : Fragment() {
                         Symbol.PLUS
                     )
 
-                    Toast.makeText(this.context, "" + viewModel.result.value, Toast.LENGTH_LONG)
-                        .show()
+
+                    val action =
+                        FourOperationsFragmentDirections.actionFourOperationsFragmentToCalculateResultFragment(
+                            viewModel.result.value!!
+                        )
+                    view!!.findNavController()
+                        .navigate(
+                            FourOperationsFragmentDirections
+                                .actionFourOperationsFragmentToCalculateResultFragment(viewModel.result.value!!)
+                        )
+
+
+
                 } else {
                     Toast.makeText(this.context, "Empty", Toast.LENGTH_LONG).show()
                 }
@@ -67,6 +79,8 @@ class FourOperationsFragment : Fragment() {
             }
 
         })
+
+
 
 
 
